@@ -1,0 +1,32 @@
+<!-- Import Polymer -->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<!-- Define your custom element -->
+<polymer-element name="my-element">
+  <template>
+    <h1><a href="/">Link to the domain root</a></h1>
+
+    <p>The href of the above element is <strong>"/"</strong> so it should resolve to:
+      <strong>{{domainName}}</strong>
+
+    <p>And it does.... but!</p>
+
+    <p>After you alter the URL to "/some/new/url" using the History API through this button:</p>
+
+    <p><button on-click="{{changeHistory}}">Change history!</button></p>
+
+    <p>The link starts to point to <strong>{{domainName}}/some</strong></p>
+
+    <p>Just hover the link to see the changes in the status bar (you don't actually have to click it)</p>
+
+  </template>
+
+  <script>Polymer('my-element', {
+    domainName: window.location.host,
+    changeHistory: function () {
+      history.pushState(null, null, "/some/new/url");
+      console.log("history changed to /some/new/url");
+    }
+  });</script>
+
+</polymer-element>
